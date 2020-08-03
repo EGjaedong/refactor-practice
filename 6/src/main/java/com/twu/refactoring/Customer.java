@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Customer {
+	private static final double PRICE_OF_REGULAR = 1.5;
+	private static final double PRICE_OF_CHILDREN = 1.5;
+	private static final double PRICE_OF_NEW_RELEASE = 3.0;
+	private static final int FREE_DAYS_OF_REGULAR = 2;
+	private static final int FREE_DAYS_OF_CHILDREN = 3;
+	private static final double FIXED_CHARGES_OF_CHILDREN = 1.5;
+	private static final double FIXED_CHARGES_OF_REGULAR = 2.0;
 
 	private String name;
 	private ArrayList<Rental> rentalList = new ArrayList<Rental>();
@@ -32,17 +39,17 @@ public class Customer {
 			// determine amounts for each line
 			switch (each.getMovie().getPriceCode()) {
 			case Movie.REGULAR:
-				thisAmount += 2;
-				if (each.getDaysRented() > 2)
-					thisAmount += (each.getDaysRented() - 2) * 1.5;
+				thisAmount += FIXED_CHARGES_OF_REGULAR;
+				if (each.getDaysRented() > FREE_DAYS_OF_REGULAR)
+					thisAmount += (each.getDaysRented() - 2) * PRICE_OF_REGULAR;
 				break;
 			case Movie.NEW_RELEASE:
-				thisAmount += each.getDaysRented() * 3;
+				thisAmount += each.getDaysRented() * PRICE_OF_NEW_RELEASE;
 				break;
 			case Movie.CHILDRENS:
-				thisAmount += 1.5;
-				if (each.getDaysRented() > 3)
-					thisAmount += (each.getDaysRented() - 3) * 1.5;
+				thisAmount += FIXED_CHARGES_OF_CHILDREN;
+				if (each.getDaysRented() > FREE_DAYS_OF_CHILDREN)
+					thisAmount += (each.getDaysRented() - FREE_DAYS_OF_CHILDREN) * PRICE_OF_CHILDREN;
 				break;
 
 			}
