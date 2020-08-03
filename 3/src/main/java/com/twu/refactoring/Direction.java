@@ -1,40 +1,31 @@
 package com.twu.refactoring;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Direction {
     private final char direction;
+    private List<Character> directionList = new ArrayList<>(Arrays.asList('N', 'E', 'N', 'W'));
 
     public Direction(char direction) {
         this.direction = direction;
     }
 
     public Direction turnRight() {
-        switch (direction) {
-            case 'N':
-                return new Direction('E');
-            case 'S':
-                return new Direction('W');
-            case 'E':
-                return new Direction('N');
-            case 'W':
-                return new Direction('S');
-            default:
-                throw new IllegalArgumentException();
-        }
+        int index = directionList.indexOf(direction);
+        if (index < directionList.size() - 1)
+            return new Direction(directionList.get(index + 1));
+        else
+            return new Direction(directionList.get(0));
     }
 
     public Direction turnLeft() {
-        switch (direction) {
-            case 'N':
-                return new Direction('W');
-            case 'S':
-                return new Direction('E');
-            case 'E':
-                return new Direction('N');
-            case 'W':
-                return new Direction('S');
-            default:
-                throw new IllegalArgumentException();
-        }
+        int index = directionList.indexOf(direction);
+        if (index > 0)
+            return new Direction(directionList.get(index - 1));
+        else
+            return new Direction(directionList.get(directionList.size() - 1));
     }
 
     @Override
