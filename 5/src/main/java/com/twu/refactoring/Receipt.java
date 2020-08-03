@@ -1,7 +1,6 @@
 package com.twu.refactoring;
 
 public class Receipt {
-    private static final int FIXED_CHARGE = 50;
     private static final double PEAK_TIME_MULTIPLIER = 1.2;
     private static final double OFF_PEAK_MULTIPLIER = 1.0;
     private static final int RATE_CHANGE_DISTANCE = 10;
@@ -18,12 +17,8 @@ public class Receipt {
     }
 
     public double getTotalCost() {
-        double totalCost = 0;
+        double totalCost = 50;
 
-        // fixed charges
-        totalCost += FIXED_CHARGE;
-
-        // taxi charges
         int totalKms = taxi.getTotalKms();
         double peakTimeMultiple = taxi.isPeakTime() ? PEAK_TIME_MULTIPLIER : OFF_PEAK_MULTIPLIER;
         if(taxi.isAirConditioned()) {
