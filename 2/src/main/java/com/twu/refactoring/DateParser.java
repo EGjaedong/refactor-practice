@@ -47,77 +47,22 @@ public class DateParser {
     }
 
     private int getMinute() {
-        int minute;
-        try {
-            String minuteString = dateAndTimeString.substring(14, 16);
-            minute = Integer.parseInt(minuteString);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Minute string is less than 2 characters");
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Minute is not an integer");
-        }
-        if (minute < 0 || minute > 59)
-            throw new IllegalArgumentException("Minute cannot be less than 0 or more than 59");
-        return minute;
+        return FormatUtil.dateNumberFormat(dateAndTimeString, 14, 16, 0,59, "Minute", 2);
     }
 
     private int getHour() {
-        int hour;
-        try {
-            String hourString = dateAndTimeString.substring(11, 13);
-            hour = Integer.parseInt(hourString);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Hour string is less than 2 characters");
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Hour is not an integer");
-        }
-        if (hour < 0 || hour > 23)
-            throw new IllegalArgumentException("Hour cannot be less than 0 or more than 23");
-        return hour;
+        return FormatUtil.dateNumberFormat(dateAndTimeString, 11, 13, 0,23, "Hour", 2);
     }
 
     private int getDate() {
-        int date;
-        try {
-            String dateString = dateAndTimeString.substring(8, 10);
-            date = Integer.parseInt(dateString);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Date string is less than 2 characters");
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Date is not an integer");
-        }
-        if (date < 1 || date > 31)
-            throw new IllegalArgumentException("Date cannot be less than 1 or more than 31");
-        return date;
+        return FormatUtil.dateNumberFormat(dateAndTimeString, 8, 10, 1,31, "Date", 2);
     }
 
     private int getMonth() {
-        int month;
-        try {
-            String monthString = dateAndTimeString.substring(5, 7);
-            month = Integer.parseInt(monthString);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Month string is less than 2 characters");
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Month is not an integer");
-        }
-        if (month < 1 || month > 12)
-            throw new IllegalArgumentException("Month cannot be less than 1 or more than 12");
-        return month;
+        return FormatUtil.dateNumberFormat(dateAndTimeString, 5, 7, 1,12, "Month", 2);
     }
 
     private int getYear() {
-        int year;
-        try {
-            String yearString = dateAndTimeString.substring(0, 4);
-            year = Integer.parseInt(yearString);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Year string is less than 4 characters");
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Year is not an integer");
-        }
-        if (year < 2000 || year > 2012)
-            throw new IllegalArgumentException("Year cannot be less than 2000 or more than 2012");
-        return year;
+        return FormatUtil.dateNumberFormat(dateAndTimeString, 0, 4, 2000,2012, "Year", 4);
     }
 }
